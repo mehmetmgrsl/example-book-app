@@ -14,7 +14,11 @@ type book struct {
 }
 
 var books = []book{
-	{ID: "404", Title: "ERROR!!!!", Author: "ERROR!!!!"},
+	{ID: "1", Title: "Science of Logic", Author: "Georg Wilhelm Friedrich Hegel"},
+	{ID: "2", Title: "The Wisdom of Life", Author: "Arthur Schopenhauer"},
+	{ID: "3", Title: "The Metamorphosis", Author: "Franz Kafka"},
+	{ID: "4", Title: "Das Kapital", Author: "Karl Marx"},
+	{ID: "5", Title: "The Sorrows of Young Werther", Author: "Johann Wolfgang von Goethe"},
 }
 
 func main() {
