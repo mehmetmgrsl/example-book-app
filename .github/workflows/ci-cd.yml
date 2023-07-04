@@ -1,0 +1,30 @@
+name: CI/CD for Golang
+on:
+  push:
+    branches: [ develop ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    uses: mehmetmgrsl/github-common-workflows/.github/workflows/golang-build.yml@main
+    with:
+      go-version: '1.20.5'
+      working-directory: .
+
+  semver:
+    needs: build
+    uses: mehmetmgrsl/github-common-workflows/.github/workflows/semver.yml@main
+    with:
+      sem_ver_increment: ${{ vars.SEM_VER_INCREMENT }}
+    secrets:
+      docker_pat: ${{ secrets.DOCKER_PAT }} 
+
+  publish:
+    needs: [build, semver]
+    uses: mehmetmgrsl/github-common-workflows/.github/workflows/publish-common.yml@main
+    with:
+      version: ${{ needs.semver.outputs.version }}
+    secrets:
+      docker_pat: ${{ secrets.DOCKER_PAT }}
