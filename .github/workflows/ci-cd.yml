@@ -5,7 +5,6 @@ on:
 
 permissions:
   contents: read
-  packages: write
 
 jobs:
   build:
@@ -19,13 +18,9 @@ jobs:
     uses: mehmetmgrsl/github-common-workflows/.github/workflows/semver.yml@main
     with:
       sem_ver_increment: ${{ vars.SEM_VER_INCREMENT }}
-    secrets:
-      docker_pat:  ${{ secrets.GITHUB_TOKEN }}
 
   publish:
     needs: [build, semver]
     uses: mehmetmgrsl/github-common-workflows/.github/workflows/publish-common.yml@main
     with:
       version: ${{ needs.semver.outputs.version }}
-    secrets:
-      docker_pat:  ${{ secrets.GITHUB_TOKEN }}
