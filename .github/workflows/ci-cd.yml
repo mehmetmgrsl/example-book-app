@@ -19,7 +19,7 @@ jobs:
     with:
       sem_ver_increment: ${{ vars.SEM_VER_INCREMENT }}
     secrets:
-      docker_pat: ${{ secrets.DOCKER_PAT }} 
+      docker_pat:  ${{ secrets.GITHUB_TOKEN }}
 
   publish:
     needs: [build, semver]
@@ -27,4 +27,4 @@ jobs:
     with:
       version: ${{ needs.semver.outputs.version }}
     secrets:
-      docker_pat: ${{ secrets.DOCKER_PAT }}
+      docker_pat:  ${{ secrets.GITHUB_TOKEN }}
